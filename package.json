@@ -1,0 +1,30 @@
+{
+  "name": "mongowebscrape",
+  "version": "1.0.0",
+  "description": "Webscraper",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tmederos/MongoWebScrape.git"
+  },
+  "author": "Trish Mederos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tmederos/MongoWebScrape/issues"
+  },
+  "homepage": "https://github.com/tmederos/MongoWebScrape#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "bootbox": "^4.4.0",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^5.0.10",
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2"
+  }
+}

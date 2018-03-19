@@ -1,0 +1,41 @@
+body {
+  background: url(/assets/img/sky_lightning.jpg) no-repeat center center fixed;
+  background-size: cover;
+  background-position: top;
+  font-family: 'Industry Black Italic', cursive;
+}
+
+.jumbotron{
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+}
+.navbar-nav > li{
+  padding-left:30px;
+  padding-right:30px;
+}
+
+.main-img{
+    max-width: 100%;
+    height: auto;
+}
+
+.btn-danger {
+  background-color: red;
+}
+
+.panel, #video{
+ margin: 10px;
+ text-align: left;
+ font-size: 20px;
+ color:   #FFFFFF
+}
+
+.save-article{
+  margin: 10px;
+}
+
+
+h1 {
+  font-family: 'Industry Black Italic', cursive;
+}
