@@ -1,8 +1,18 @@
 var Article = require("../models/Article");
 
+// function getArticles() {
+//    Article.find({saved:true}, function (err, docs){
+//     //  console.log("Docs", docs);
+//      console.log("count - " + docs.length);
+//     //  return(docs);
+//   })
+// }
+
 function getArticles() {
   return Article.find({});
 }
+
+
 
 function getOneArticle(){
   return Article.findOne({_id: req.params.id})
@@ -29,6 +39,8 @@ function deleteArticle(_id) {
 
 function insertArticle( body ){
   return Article.create(body).then(function (doc) {
+    console.log( "Saved - " + body.saved );
+
     console.log("In new Article, this is the DOC " + doc);
     console.log("Article saved: " + doc);
     return(doc);
@@ -43,9 +55,6 @@ function insertArticle( body ){
 //     console.log("Article saved: " + doc);
 //   });
 // }
-
-
-
 
 module.exports = {
     getOneArticle: getOneArticle,
