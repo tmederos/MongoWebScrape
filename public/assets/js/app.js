@@ -1,5 +1,6 @@
 $(document).ready(function() {
-
+  console.log("top of app.js");
+  res.render("empty");
   $(".scrape").click(function(event) {
       event.preventDefault();
       $.get("/scrape").then(function(data) {
@@ -45,8 +46,10 @@ $(document).ready(function() {
           url: "/articles",
           data: articleToSave
       }).then(function(data) {
+        
         console.log( "AHHHHHHHH##############################################" )
       });
+      console.log( "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY" )
   });
 
 });

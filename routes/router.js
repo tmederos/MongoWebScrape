@@ -25,7 +25,7 @@ router.get("/", function (req, res) {
 
   // A GET request to scrape the NHL/Lightning website
   router.get("/scrape", function(req, res) {
-    console.log( "In get /articles");
+    console.log( "In get /scrape");
     fetchController.scrapeHeadlines().then(function( articles ){
       res.json(articles)
     });
@@ -59,9 +59,8 @@ router.get("/", function (req, res) {
 
   router.post("/articles", function (req, res) {
     console.log("Data check of saved - " + req.saved);
-    articlesController.insertArticle(req.body).then(function( note ){
-      res.send("Article saved.")
-      //res.redirect("/articles/" + req.params.id);
+    articlesController.insertArticle(req.body).then(function( article ){
+      res.sendStatus(200);
     }).catch(function (err) {
       res.status(500).send('Couldn\'t save the article')
     });

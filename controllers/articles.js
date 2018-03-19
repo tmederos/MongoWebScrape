@@ -9,8 +9,8 @@ var Article = require("../models/Article");
 // }
 
 function getArticles() {
-  return Article.find({});
-}
+  return Article.find({saved:true});
+ }
 
 
 
@@ -38,11 +38,12 @@ function deleteArticle(_id) {
 }
 
 function insertArticle( body ){
-  return Article.create(body).then(function (doc) {
-    console.log( "Saved - " + body.saved );
+  console.log("Body in Insert ", body);
+  return Article.create({ title: body.title, link: body.link, saved: true }).then(function (doc) {
+ 
 
     console.log("In new Article, this is the DOC " + doc);
-    console.log("Article saved: " + doc);
+    // console.log("Article saved: " + doc);
     return(doc);
   });
 }

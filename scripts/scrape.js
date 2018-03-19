@@ -6,7 +6,6 @@ function scrape(){
     return request("https://www.nhl.com/lightning/")
      .then(function( html ){
       const resultsArr = [];
-
      // Then, we load that into cheerio and save it to $ for a shorthand selector
       var $ = cheerio.load(html);
       // Now, we grab every h2 within an article tag, and do the following:

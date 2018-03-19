@@ -41,6 +41,7 @@ db.once("open", function() {
 
 //set engine and default for handlebars
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+console.log( "Default layout set to main.");
 app.set("view engine", "handlebars");
 
 
