@@ -23,27 +23,21 @@ app.use(bodyParser.urlencoded({
    extended: false
 }));
 
-// Set mongoose to leverage built in JavaScript ES6 Promises
+// set up database
+var db = process.env.MONGODB_URI || "mongodb://localhost/MongoHeadlines";
 mongoose.Promise = Promise;
-
-// Database configuration with mongoose
-mongoose.connect("mongodb://localhost/scraped_news");
-
-var db = mongoose.connection;
-
-db.on("error", function(error) {
-  console.log("Mongoose Error: ", error);
+mongoose.connect(db, function(error) {
+	if (error) {
+		console.log(error);
+	} else {
+		console.log("mongoose connection is sucessful");
+	}
 });
 
-db.once("open", function() {
-  console.log("Mongoose connection sucessful.");
-});
 
 //set engine and default for handlebars
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-console.log( "Default layout set to main.");
 app.set("view engine", "handlebars");
-
 
 // Have every request go through router middlewar
 app.use(router);
