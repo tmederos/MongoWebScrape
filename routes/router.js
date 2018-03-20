@@ -6,22 +6,13 @@ var articlesController = require( "../controllers/articles")
 var express = require("express");
 var router = express.Router();   
 
+  router.get("/", function(req, res) {
+    res.render("index");
+  });
 
-router.get("/", function (req, res) {
-  console.log( "In get /");
-  articlesController.getArticles()
-  .then(function (error, data) {
-      if (error) {
-        res.send(error);
-      }
-      else {
-        var newsObj = {
-          Article: data
-        };
-        res.render("index", newsObj);
-      }
-    });
-});
+  router.get("/saved", function(req, res) {
+    res.render("saved");
+  });
 
   // A GET request to scrape the NHL/Lightning website
   router.get("/scrape", function(req, res) {
@@ -31,21 +22,16 @@ router.get("/", function (req, res) {
     });
   });
 
-  router.get("/saved", function(req, res) {
-    console.log( "In get /saves");
-		res.render("saved");
-  });
-  
   router.get("/articles", function(req, res) {
-    console.log( "In get /articles");
 		var query = {};
 		if (req.query.saved) {
-      console.log("Found article - ", req.query.saved );
 			query = req.query;
 		}
-		articlesController.getArticles(query, function (data){
-			res.json(data);
-		});
+		articlesController.getArticles(false)
+    .then(function (error, data) {
+      console.log("In Get Articles it worked !!!!!!!!!!!!!!!!!!");
+      res.json(data);
+    });
 	});
 
   router.post("/notes", function (req, res) {

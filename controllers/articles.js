@@ -1,18 +1,9 @@
 var Article = require("../models/Article");
 
-// function getArticles() {
-//    Article.find({saved:true}, function (err, docs){
-//     //  console.log("Docs", docs);
-//      console.log("count - " + docs.length);
-//     //  return(docs);
-//   })
-// }
-
-function getArticles() {
-  return Article.find({saved:true});
+function getArticles(saved=false) {
+  console.log( "In getArticles, saved - " + saved );
+  return Article.find({saved:saved?true:false});
  }
-
-
 
 function getOneArticle(){
   return Article.findOne({_id: req.params.id})

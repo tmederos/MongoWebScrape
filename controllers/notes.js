@@ -27,19 +27,7 @@ function insertNote( body ){
   });
 }
 
-// function deleteOneNote (_id) {
-//     return Note.remove({"_id": req.params.id}, function(err, newdoc){
-//       if(err) console.log(err);
-//       //redirect to reload the page
-//       res.redirect('/home');
-//     });
-// }
 
-// function addNote (query, cb) {
-//     Article.findOneAndUpdate({_id: query.id }, {
-//       $push: {note: query.note}
-//        }, {}, cb);
-//   }
 
 module.exports = {
     getOneNote: getOneNote,
