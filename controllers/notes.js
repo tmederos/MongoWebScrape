@@ -1,4 +1,9 @@
 var Note = require("../models/Note");
+var Article = require("../models/Article");
+
+function getNotes(query) {
+  return Note.find(query);
+ }
 
 function getOneNote (_id) {
   return Note.findOne({_id: req.params.id})
@@ -12,26 +17,30 @@ function getOneNote (_id) {
           });
   };
 
-function getAllNotes () {
-  return Note.find({});
-}
+// function insertNote(body) {
+//   console.log("Body in Insert Note", body);
+//   return Note.create({ body: body.body}).then(function (doc) {
+//      console.log("In new Note, this is the DOC " + doc);
+//     return(doc);
+//   });
+// }
 
-function insertNote( body ){
+function insertNote( body, article_id ){
   var newNote = new Note(body);
-  return newNote.save().then(function (doc) {
+  return newNote.save()
+  .then(function (doc) {
     console.log("this is the DOC " + doc);
-  return Article.findOneAndUpdate({"_id": req.params.id},
-      { $push: { "note": doc._id } }, {new: true})
+  return Article.findOneAndUpdate({"_id": article_id},
+      { $push: { "notes": doc._id } }, {new: true})
   }).then(function (doc) {
           console.log("note saved: " + doc);
+     return(doc);     
   });
 }
 
-
-
 module.exports = {
     getOneNote: getOneNote,
-    getAllNotes: getAllNotes,
+    getNotes: getNotes,
     // deleteOneNote: deleteOneNote,
     insertNote: insertNote
 }

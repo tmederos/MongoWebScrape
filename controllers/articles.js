@@ -1,9 +1,21 @@
 var Article = require("../models/Article");
+var scrape = require("../scripts/scrape");
 
-function getArticles(saved=false) {
-  console.log( "In getArticles, saved - " + saved );
-  return Article.find({saved:saved?true:false});
+function getArticles(query) {
+  return Article.find(query);
  }
+
+//  function getallArticles(cb) {
+//   scrape(function(data) {
+//     var articles = data;
+//     for (var i=0; i<articles.length; i++) {
+//       articles[i].saved = false;
+//     }
+//     Articles.collection.insertMany(articles, {ordered: false}, function(err, docs) {
+//       cb(err, docs);
+//     });
+//   });
+// }
 
 function getOneArticle(){
   return Article.findOne({_id: req.params.id})
@@ -20,21 +32,16 @@ function getOneArticle(){
 }
 
 
-function deleteArticle(_id) {
-  return Article.remove({"_id": req.params.id}, function(err, newdoc){
-    if(err) console.log(err);
-    //redirect to reload the page
-    res.redirect('/index');
+function deleteArticle(body) {
+  return Article.remove({"_id": body.id})   
+  .then(function (doc) {
+    return(doc);
   });
 }
 
 function insertArticle( body ){
-  console.log("Body in Insert ", body);
-  return Article.create({ title: body.title, link: body.link, saved: true }).then(function (doc) {
- 
-
-    console.log("In new Article, this is the DOC " + doc);
-    // console.log("Article saved: " + doc);
+  return Article.create({ title: body.title, link: body.link, saved: true })
+  .then(function (doc) {
     return(doc);
   });
 }
@@ -49,6 +56,7 @@ function insertArticle( body ){
 // }
 
 module.exports = {
+    // getallArticles: getallArticles,
     getOneArticle: getOneArticle,
     getArticles: getArticles,
     deleteArticle: deleteArticle,

@@ -25,6 +25,10 @@ body {
   background-color: red;
 }
 
+.scrape {
+	cursor: pointer;
+}
+
 .panel {
 	border-radius: 1;
   box-shadow: 3px 3px 20px lightslategrey;
@@ -52,7 +56,25 @@ h3 {
   text-align: left;
 }
 
-.save-article{
+.save, .delete, .notes {
   margin: 10px;
+}
+.btn {
+	float: right;
+}
+
+textarea {
+  resize: none;
+  width: 100%;
+  padding: 10px;
+}
+
+.note .list-group-item {
+	padding: 30px;
+}
+
+.note .list-group-item {
+	position: relative;
+	bottom: 10px;
 }
 
