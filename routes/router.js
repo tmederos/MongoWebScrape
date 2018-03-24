@@ -27,7 +27,6 @@ var router = express.Router();
 
   // A GET request to scrape the NHL/Lightning website
   router.get("/scrape", function(req, res) {
-    console.log( "In get /scrape");
     fetchController.scrapeHeadlines().then(function( articles ){
       res.json(articles)
     });
@@ -35,22 +34,18 @@ var router = express.Router();
 
 	router.get("/notes/:article_id?", function(req, res) {
     var query = {};
-  console.log( "In get Notes - " + req.params.article_id);  
 		if (req.params.article_id) {
 			query._id = req.params.article_id;
     }
     notesController.getNotes(query)
       .then (function (data){
-      console.log("The Data - " + JSON.stringify(data, null,2 ) );  
       res.json(data);
 		});
 	});
 
   router.post("/notes/:article_id", function (req, res) {
-    console.log( "New Note - ", req.body);
     notesController.insertNote(req.body, req.params.article_id )
     .then (function (data){
-      console.log("Data - ", data );  
       res.json(data);
 		}).catch(function(err){
       console.log(err);
@@ -71,7 +66,6 @@ var router = express.Router();
     query._id = req.params.id;
     articlesController.deleteArticle(query)
     .then (function (data){
-      console.log("Data - ", data );  
       res.json(data);
 		});
 	});

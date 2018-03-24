@@ -68,12 +68,10 @@ $(document).ready(function() {
 
 
 	function renderNotesList (data) {
-console.log("In Render Notes - ");				
 		var notesToRender = [];
 		var currentNote;
 		if (!data.notes.length) {
-console.log("No Notes - ");			
-			currentNote = [
+				currentNote = [
 			"<li class='list-group=item'>",
 			"No notes for this article yet.",
 			"</li>"
@@ -109,11 +107,8 @@ console.log("No Notes - ");
 	}
 
 	function handleArticleNotes() {
-		console.log("Top of Handle Notes - ");				
 		var currentArticle = $(this).parents(".panel").data();
-		console.log( "current article id - " + currentArticle._id);
 		$.get("/notes/" + currentArticle._id).then(function(data) {
-console.log("EEEEEEEEEEEE Note data - ", data );
 				var modalText = [
 			"<div class='container-fluid text-center'>",
 			"<h4>Notes for Article: ",
@@ -134,10 +129,8 @@ console.log("EEEEEEEEEEEE Note data - ", data );
 				_id: currentArticle._id,
 				notes: data || []
 			};
-	console.log("AHHHHHHHHHHHHHHHHHHHHHHH - "+ JSON.stringify( noteData, null, 2));	
 			$(".btn.save").data("article", noteData);
 			renderNotesList(noteData);
-console.log("after render note list.");			
 		});
 	}
 
@@ -150,7 +143,6 @@ console.log("after render note list.");
 				body: newNote
 			};
 			$.post("/notes/" + _id, noteData).then(function(){
-	console.log("In note save");			
 				bootbox.hideAll();
 			});
 		}
