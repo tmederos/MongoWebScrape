@@ -35,31 +35,16 @@ var router = express.Router();
 
 	router.get("/notes/:article_id?", function(req, res) {
     var query = {};
-  console.log( "In get Notes - " );  
+  console.log( "In get Notes - " + req.params.article_id);  
 		if (req.params.article_id) {
 			query._id = req.params.article_id;
     }
     notesController.getNotes(query)
-    .then (function (data){
-      console.log("No Data - ", data );  
+      .then (function (data){
+      console.log("The Data - " + JSON.stringify(data, null,2 ) );  
       res.json(data);
 		});
 	});
-
-  // router.get("/fetch", function(req, res) {
-  //   console.log( "Top of get articles ");
-	// 	articlesController.getallArticles(function(err, docs) {
-	// 		if (!docs || docs.insertedCount === 0) {
-	// 			res.json({
-	// 				message: "No new articles today. Check back later!"
-	// 			});
-	// 		} else {
-	// 			res.json({
-	// 				message: "Added " + docs.insertedCount + " new articles!"
-	// 			});
-	// 		}
-	// 	});
-	// });
 
   router.post("/notes/:article_id", function (req, res) {
     console.log( "New Note - ", req.body);
@@ -73,7 +58,6 @@ var router = express.Router();
   });
 
   router.post("/articles", function (req, res) {
-    console.log("Data check of saved - " + req.saved);
     articlesController.insertArticle(req.body)
     .then(function( article ){
       res.sendStatus(200);
@@ -84,7 +68,7 @@ var router = express.Router();
 
 	router.delete("/articles/:id", function(req, res) {
 		var query = {};
-		query._id = req.params.id;
+    query._id = req.params.id;
     articlesController.deleteArticle(query)
     .then (function (data){
       console.log("Data - ", data );  

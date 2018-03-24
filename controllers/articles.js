@@ -5,20 +5,8 @@ function getArticles(query) {
   return Article.find(query);
  }
 
-//  function getallArticles(cb) {
-//   scrape(function(data) {
-//     var articles = data;
-//     for (var i=0; i<articles.length; i++) {
-//       articles[i].saved = false;
-//     }
-//     Articles.collection.insertMany(articles, {ordered: false}, function(err, docs) {
-//       cb(err, docs);
-//     });
-//   });
-// }
-
-function getOneArticle(){
-  return Article.findOne({_id: req.params.id})
+function getOneArticle(query){
+  return Article.findOne({_id: query.params.id})
      //Populate all of the notes associated with it
     .populate("note")
     .exec(function (error, doc) {
@@ -31,11 +19,10 @@ function getOneArticle(){
     });
 }
 
-
 function deleteArticle(body) {
-  return Article.remove({"_id": body.id})   
-  .then(function (doc) {
-    return(doc);
+  return Article.remove({"_id": body._id})   
+  .then(function (err) {
+    return(err);
   });
 }
 
@@ -46,17 +33,7 @@ function insertArticle( body ){
   });
 }
 
-// function insertArticle( body ){
-//   var newArticle = new Article(body);
-//   return Article.update({ _id: query.id }, {$set: {saved: query.saved}}, {})
-//   .then(function (doc) {
-//     console.log("In new Article, this is the DOC " + doc);
-//     console.log("Article saved: " + doc);
-//   });
-// }
-
 module.exports = {
-    // getallArticles: getallArticles,
     getOneArticle: getOneArticle,
     getArticles: getArticles,
     deleteArticle: deleteArticle,

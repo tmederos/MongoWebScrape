@@ -13,7 +13,6 @@ var PORT = 3000;
 // Initialize Express
 var app = express();
 // Make public a static dir
-// app.use(express.static(process.cwd() + "/public"));
 // Serve static content for the app from the "public" directory in the application directory.
 const path = require("path");
 app.use(express.static(path.join(__dirname, "public")));

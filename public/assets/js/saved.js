@@ -4,7 +4,6 @@ $(document).ready(function() {
 	$(document).on("click", ".btn.delete", handleArticleDelete);
 	$(document).on("click", ".btn.notes", handleArticleNotes);
 	$(document).on("click", ".btn.save", handleNoteSave);
-	$(document).on("click", ".btn.note-delete", handleNoteDelete);
 	
 	initPage();
 
@@ -47,7 +46,7 @@ $(document).ready(function() {
 			"</div>"
 			].join(""));
 		panel.data("_id", article._id);
-		return panel;
+			return panel;
 	}
 
 	function renderEmpty() {
@@ -112,7 +111,9 @@ console.log("No Notes - ");
 	function handleArticleNotes() {
 		console.log("Top of Handle Notes - ");				
 		var currentArticle = $(this).parents(".panel").data();
+		console.log( "current article id - " + currentArticle._id);
 		$.get("/notes/" + currentArticle._id).then(function(data) {
+console.log("EEEEEEEEEEEE Note data - ", data );
 				var modalText = [
 			"<div class='container-fluid text-center'>",
 			"<h4>Notes for Article: ",
@@ -133,8 +134,10 @@ console.log("No Notes - ");
 				_id: currentArticle._id,
 				notes: data || []
 			};
+	console.log("AHHHHHHHHHHHHHHHHHHHHHHH - "+ JSON.stringify( noteData, null, 2));	
 			$(".btn.save").data("article", noteData);
 			renderNotesList(noteData);
+console.log("after render note list.");			
 		});
 	}
 
@@ -147,19 +150,10 @@ console.log("No Notes - ");
 				body: newNote
 			};
 			$.post("/notes/" + _id, noteData).then(function(){
+	console.log("In note save");			
 				bootbox.hideAll();
 			});
 		}
-	}
-
-	function handleNoteDelete() {
-		var noteToDelete = $(this).data("_id");
-		$ajax({
-			url: "/notes/" + noteToDelete,
-			method: "DELETE",
-		}).then(function() {
-			bootbox.hideAll();
-		});
 	}
 
 });
