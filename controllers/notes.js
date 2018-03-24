@@ -2,8 +2,11 @@ var Note = require("../models/Note");
 var Article = require("../models/Article");
 
 function getNotes(query) {
-  return Article.find({"_id": query._id}).populate('Note');
-  // return Note.find(query);
+  return Article.findOne({"_id": query._id}).populate('notes').
+  then(function(doc){
+    console.log( "In notes, doc ", doc );
+    return(doc.notes);
+  });
  }
 
 function insertNote( body, article_id ){

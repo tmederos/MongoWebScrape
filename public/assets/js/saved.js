@@ -83,7 +83,7 @@ console.log("No Notes - ");
 			for (var i = 0; i < data.notes.length; i++) {
 				currentNote = $([
 					"<li class='list-group-item note'>",
-					data.notes[i].noteText,
+					data.notes[i].body,
 					"<button class='btn btn-danger note-delete'>x</button>",
 					"</li>"
 					].join(""));
