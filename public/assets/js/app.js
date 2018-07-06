@@ -46,10 +46,10 @@ $(document).ready(function() {
 
 	function renderEmpty() {
 		var emptyAlert =
-		$(["<div class='alert alert-warning text-center'>",
+		$(["<div class='render-empty-text alert alert-warning text-center'>",
 			"<h4>No new articles.<h4>",
 			"</div>",
-			"<div class='panel-body text-center'>",
+			"<div class='render-empty-text panel-body text-center'>",
 			"<h4><a class='scrape-new'>Scrape new articles</a></h4>",
 			"<h4><a href='/saved'>Saved articles</a></h4>",
 			"</div>"
@@ -100,6 +100,7 @@ $(document).ready(function() {
 				panelHead.append(button);
 				panelBody.append(link);
 				$('.article-container').append(panel);
+				$('.render-empty-text').hide();
 			})
 		}).fail(function (err) {
 			console.log('failed get /scrape', err)
